@@ -1,0 +1,75 @@
+{% extends 'bootstrap/base.html' %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% block styles %}
+{{ super() }}
+
+   <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/external.css')}}">
+
+{% endblock %}
+{% block content %}
+{% include "header.html" %}
+
+  <!-- Page Header -->
+  <header class="masthead" style="background-image: url('https://images.unsplash.com/photo-1484100356142-db6ab6244067?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=80')">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="page-heading">
+            <h1>Log In</h1>
+            <span class="subheading">Welcome Back!</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+
+        <div class="box">
+    <h1>Login Portal</h1>
+            {% with Unauthorized_error = get_flashed_messages() %}
+    {% if Unauthorized_error %}
+                <h5 class="help-block text-danger">*{{ Unauthorized_error[0] }}</h5>
+
+            {% endif %}
+    {% endwith %}
+    <form action="{{ url_for('login') }}" method="post" novalidate enctype="multipart/form-data" style="margin-top: 20px;">
+        {{ form.csrf_token }}
+
+
+        <div class="form-group">
+            {{ form.email(class="form-control", placeholder="Email") }}
+            {% for error in form.email.errors %}
+                <p class="help-block text-danger">{{ error }}</p>
+            {% endfor %}
+            {% if error_email %}
+                <p class="help-block text-danger">{{ error_email }}</p>
+            {% endif %}
+        </div>
+
+        <div class="form-group">
+            {{ form.password(class="form-control", placeholder="Password") }}
+            {% for error in form.password.errors %}
+                <p class="help-block text-danger">{{ error }}</p>
+            {% endfor %}
+            {% if error_pass %}
+                <p class="help-block text-danger">{{ error_pass }}</p>
+            {% endif %}
+
+        </div>
+
+
+        <button type="submit" class="btn btn-primary btn-block btn-large">Log me In</button>
+    </form>
+            {% include "footer.html" %}
+</div>
+
+      </div>
+    </div>
+
+  </div>
+{% endblock %}

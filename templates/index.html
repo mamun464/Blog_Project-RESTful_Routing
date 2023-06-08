@@ -30,18 +30,23 @@
             </h3>
           </a>
           <p class="post-meta">Posted by
-            <a href="#">{{post.author}}</a>
-            on {{post.date}} <a href="{{url_for('delete', post_id=post.id)}}" style="color: #F2B6A0; transition: color 0.3s;" onmouseover="this.style.color='#FF1E1E';" onmouseout="this.style.color='#F2B6A0';">✘</a></p>
-
+            <a href="{{url_for('profile_view',author=post.author_link.id)}}">{{post.author_link.name}}</a>
+            on {{post.date}}
+            {% if  id  == 1 and  status : %}
+              <a href="{{url_for('delete', post_id=post.id)}}" style="color: #F2B6A0; transition: color 0.3s;" onmouseover="this.style.color='#FF1E1E';" onmouseout="this.style.color='#F2B6A0';">✘</a></p>
+            {% endif %}
         </div>
         <hr>
         {% endfor %}
 
 
         <!-- New Post -->
-        <div class="clearfix">
-          <a class="btn btn-primary float-right" href="{{url_for('create_post')}}">Create New Post</a>
-        </div>
+
+        {% if  id  == 1 and  status : %}
+          <div class="clearfix">
+            <a class="btn btn-primary float-right" href="{{url_for('create_post')}}">Create New Post</a>
+          </div>
+        {% endif %}
       </div>
     </div>
   </div>

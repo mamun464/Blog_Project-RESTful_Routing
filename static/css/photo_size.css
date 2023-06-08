@@ -1,0 +1,16 @@
+.profile-image {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 50%;
+}
+
+
+.resize-photo {
+  width: 248px;
+  height: 248px;
+  border-radius: 2%;
+  object-fit: cover;
+  cursor: pointer;
+}
