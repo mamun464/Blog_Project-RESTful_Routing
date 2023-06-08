@@ -577,8 +577,9 @@ def profile_view():
 
     img = author_details.image_data
     profile_image = f"data:image/jpeg;base64,{base64.b64encode(img).decode('utf-8')}"
+    count = db.session.query(BlogPost).filter_by(author_id=author_id).count()
 
-    return render_template("profile_view.html",form=pro_view,img=profile_image)
+    return render_template("profile_view.html",form=pro_view,img=profile_image,post_count=count)
 
 
 class UpdateForm(FlaskForm):
